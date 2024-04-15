@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="inertial_macros.xacro"/>
+    <xacro:include filename="mecanum_wheel_macro.xacro"/>
+
+    <!-- MATERIALS -->
+
+    <material name="yellow">
+        <color rgba="1 1 0 1"/>
+    </material>
+
+     <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+
+    <!-- CONSTANS -->
+    <xacro:property name="PI" value="3.1415926535897931" />
+
+    <xacro:property name="wheel_radius" value="0.050" />
+    <xacro:property name="wheel_width" value="0.0505" />
+
+
+    <!-- BASE LINK -->
+
+    <link name="base_link">
+    </link>
+
+<!--    &lt;!&ndash; CHASSIS &ndash;&gt;-->
+
+<!--    <joint name="chassis_joint" type="fixed">-->
+<!--        <parent link="base_link"/>-->
+<!--        <child link="chassis"/>-->
+<!--        <origin xyz="0 0 0"/>-->
+<!--    </joint>-->
+
+<!--    <link name="chassis">-->
+<!--        <visual>-->
+<!--            <origin xyz="0 0 0.08"/>-->
+<!--            <geometry>-->
+<!--                <box size="0.4 0.24 0.08"/>-->
+<!--            </geometry>-->
+<!--            <material name="yellow"/>-->
+<!--        </visual>-->
+
+<!--        <collision>-->
+<!--            <origin xyz="0 0 0.08"/>-->
+<!--            <geometry>-->
+<!--                <box size="0.4 0.24 0.08"/>-->
+<!--            </geometry>-->
+<!--        </collision>-->
+<!--        <xacro:inertial_box mass="0.5" x="0.4" y="0.3" z="0.1">-->
+<!--            <origin xyz="0 0 0.15" rpy="0 0 0"/>-->
+<!--        </xacro:inertial_box>-->
+<!--    </link>-->
+
+<!--    <gazebo reference="chassis">-->
+<!--        <material>Gazebo/Yellow</material>-->
+<!--    </gazebo>-->
+
+
+
+<!--        &lt;!&ndash;    1) LEFT FRONT WHEEL&ndash;&gt;-->
+
+<!--    <xacro:mecanum_wheel scale="0.0015" xyz="0.125 0.1575 0.08"-->
+<!--rpy="0 1 0" joint_name="left_front_wheel_joint" child_link="left_front_wheel">-->
+<!--    </xacro:mecanum_wheel>-->
+
+
+
+<!--    &lt;!&ndash;    2) LEFT REAR WHEEL&ndash;&gt;-->
+
+<!--    <xacro:mecanum_wheel scale="0.0015" xyz="-0.125 0.1575 0.08"-->
+<!--rpy="0 1 0" joint_name="left_rear_wheel_joint" child_link="left_rear_wheel">-->
+<!--    </xacro:mecanum_wheel>-->
+
+            <!--    3) RIGHT FRONT WHEEL-->
+
+<!--    <xacro:mecanum_wheel scale="0.0015" xyz="0.125 -0.1575 0.08"-->
+<!--rpy="0 1 0" joint_name="right_front_wheel_joint" child_link="right_front_wheel">-->
+<!--    </xacro:mecanum_wheel>-->
+
+
+
+
+    <xacro:mecanum_wheel1 name="right" side="1" interface="hardware_interface/EffortJointInterface" />
+
+  <joint name="right_joint_name" type="fixed">
+    <parent link="base_link" />
+    <child link="right_wheel_link" />
+  </joint>
+
+
+
+
+<!--    &lt;!&ndash;    2) RIGHT REAR WHEEL&ndash;&gt;-->
+
+<!--    <xacro:mecanum_wheel scale="0.0015" xyz="-0.125 -0.1575 0.08"-->
+<!--rpy="0 1 0" joint_name="right_rear_wheel_joint" child_link="right_rear_wheel">-->
+<!--    </xacro:mecanum_wheel>-->
+
+
+
+ </robot>
