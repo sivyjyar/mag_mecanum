@@ -36,10 +36,65 @@ def generate_launch_description():
                    '-entity','mecanum_bot'],
         output='screen')
 
+
+# CREATING CONTROLERS
+
+    joint_state_broadcaster_spawner = Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        )
+
+    robot_controller_spawner = Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=["right_front_controller",
+                       "left_front_controller",
+                       "right_rear_controller",
+                       "left_rear_controller"],
+        )
+
+
+
+
+    # controll_spawn = Node(
+    #     package='controller_manager',
+    #     executable='spawner',
+    #     arguments=['joint_state_broadcaster', 'right_front_controller',
+    #                'left_front_controller', 'right_rear_controller',
+    #                'left_rear_controller', "--controller-manager", "/controller_manager"],
+    # )
+
+
+
+
+
+
+    # joint_state_broadcaster_spawner = Node(
+    #         package="controller_manager",
+    #         executable="spawner",
+    #         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+    #     )
+    #
+    # robot_controller_spawner = Node(
+    #         package="controller_manager",
+    #         executable="spawner",
+    #         arguments=["diff_cont", "--controller-manager", "/controller_manager"],
+    #     )
+
+
     # Run the node
     return LaunchDescription([
         rsp,
         gazebo,
-        spawn_entity
+        spawn_entity,
+
+
+        joint_state_broadcaster_spawner,
+        robot_controller_spawner,
+
+        # diff_drive_spawner,
+        # joint_broad_spawner
+        # controll_spawn
     ])
 

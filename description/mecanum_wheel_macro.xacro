@@ -4,7 +4,7 @@
   <xacro:include filename="wheel.xacro" />
   <xacro:include filename="rollers.xacro"  />
 
-  <xacro:macro name="mecanum_wheel1" params="name side interface">
+  <xacro:macro name="mecanum_wheel" params="name side interface">
     
     <xacro:wheel_link name="${name}" side="${side}" />    
     <xacro:rollers_link name="${name}" side="${side}" />

@@ -29,6 +29,7 @@
       <kp value="10000000.0" />
       <kd value="1.0" />
       <fdir1 value="0 1 0"/>
+        <material>Gazebo/White</material>
     </gazebo>
 
   </xacro:macro>

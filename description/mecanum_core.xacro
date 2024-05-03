@@ -30,78 +30,117 @@
     <link name="base_link">
     </link>
 
-<!--    &lt;!&ndash; CHASSIS &ndash;&gt;-->
+    <!-- CHASSIS -->
 
-<!--    <joint name="chassis_joint" type="fixed">-->
-<!--        <parent link="base_link"/>-->
-<!--        <child link="chassis"/>-->
-<!--        <origin xyz="0 0 0"/>-->
-<!--    </joint>-->
+    <joint name="chassis_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="chassis"/>
+        <origin xyz="0 0 0"/>
+    </joint>
 
-<!--    <link name="chassis">-->
-<!--        <visual>-->
-<!--            <origin xyz="0 0 0.08"/>-->
-<!--            <geometry>-->
-<!--                <box size="0.4 0.24 0.08"/>-->
-<!--            </geometry>-->
-<!--            <material name="yellow"/>-->
-<!--        </visual>-->
+    <link name="chassis">
+        <visual>
+            <origin xyz="0 0 0.1"/>
+            <geometry>
+                <box size="0.4 0.24 0.1"/>
+            </geometry>
+            <material name="yellow"/>
+        </visual>
 
-<!--        <collision>-->
-<!--            <origin xyz="0 0 0.08"/>-->
-<!--            <geometry>-->
-<!--                <box size="0.4 0.24 0.08"/>-->
-<!--            </geometry>-->
-<!--        </collision>-->
-<!--        <xacro:inertial_box mass="0.5" x="0.4" y="0.3" z="0.1">-->
-<!--            <origin xyz="0 0 0.15" rpy="0 0 0"/>-->
-<!--        </xacro:inertial_box>-->
-<!--    </link>-->
+        <collision>
+            <origin xyz="0 0 0.1"/>
+            <geometry>
+                <box size="0.4 0.24 0.1"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.5" x="0.4" y="0.24" z="0.1">
+            <origin xyz="0 0 0.1" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
 
-<!--    <gazebo reference="chassis">-->
-<!--        <material>Gazebo/Yellow</material>-->
-<!--    </gazebo>-->
-
-
-
-<!--        &lt;!&ndash;    1) LEFT FRONT WHEEL&ndash;&gt;-->
-
-<!--    <xacro:mecanum_wheel scale="0.0015" xyz="0.125 0.1575 0.08"-->
-<!--rpy="0 1 0" joint_name="left_front_wheel_joint" child_link="left_front_wheel">-->
-<!--    </xacro:mecanum_wheel>-->
+    <gazebo reference="chassis">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
 
 
 
-<!--    &lt;!&ndash;    2) LEFT REAR WHEEL&ndash;&gt;-->
+        <!--    1) LEFT FRONT WHEEL-->
 
-<!--    <xacro:mecanum_wheel scale="0.0015" xyz="-0.125 0.1575 0.08"-->
-<!--rpy="0 1 0" joint_name="left_rear_wheel_joint" child_link="left_rear_wheel">-->
-<!--    </xacro:mecanum_wheel>-->
+ <xacro:mecanum_wheel name="left_front" side="-1" interface="hardware_interface/EffortJointInterface" />
+
+  <joint name="left_front_wheel_joint" type="continuous">
+    <parent link="chassis" />
+    <child link="left_front_wheel_link" />
+    <origin rpy="0 0 1.5708"  xyz="0.125 0.15 0.1"/>
+  </joint>
+
+    <!--    2) LEFT REAR WHEEL-->
+
+ <xacro:mecanum_wheel name="left_rear" side="1" interface="hardware_interface/EffortJointInterface" />
+
+  <joint name="left_rear_wheel_joint" type="continuous">
+    <parent link="chassis" />
+    <child link="left_rear_wheel_link" />
+    <origin rpy="0 0 1.5708"  xyz="-0.125 0.15 0.1"/>
+  </joint>
 
             <!--    3) RIGHT FRONT WHEEL-->
 
-<!--    <xacro:mecanum_wheel scale="0.0015" xyz="0.125 -0.1575 0.08"-->
-<!--rpy="0 1 0" joint_name="right_front_wheel_joint" child_link="right_front_wheel">-->
-<!--    </xacro:mecanum_wheel>-->
+ <xacro:mecanum_wheel name="right_front" side="1" interface="hardware_interface/EffortJointInterface" />
+
+  <joint name="right_front_wheel_joint" type="continuous">
+    <parent link="chassis" />
+    <child link="right_front_wheel_link" />
+    <origin rpy="0 0 1.5708"  xyz="0.125 -0.15 0.1"/>
+  </joint>
 
 
+    <!--    4) RIGHT REAR WHEEL-->
 
+ <xacro:mecanum_wheel name="right_rear" side="-1" interface="hardware_interface/EffortJointInterface" />
 
-    <xacro:mecanum_wheel1 name="right" side="1" interface="hardware_interface/EffortJointInterface" />
-
-  <joint name="right_joint_name" type="fixed">
-    <parent link="base_link" />
-    <child link="right_wheel_link" />
+  <joint name="right_rear_wheel_joint" type="continuous">
+    <parent link="chassis" />
+    <child link="right_rear_wheel_link" />
+    <origin rpy="0 0 1.5708"  xyz="-0.125 -0.15 0.1"/>
   </joint>
 
 
 
 
-<!--    &lt;!&ndash;    2) RIGHT REAR WHEEL&ndash;&gt;-->
 
-<!--    <xacro:mecanum_wheel scale="0.0015" xyz="-0.125 -0.1575 0.08"-->
-<!--rpy="0 1 0" joint_name="right_rear_wheel_joint" child_link="right_rear_wheel">-->
-<!--    </xacro:mecanum_wheel>-->
+<!--    SHIT-->
+
+    <joint name="PERED_joint" type="fixed">
+        <parent link="chassis" />
+    <child link="PERED" />
+        <origin xyz="0.125 0 0.15"/>
+
+
+    </joint>
+
+       <link name="PERED">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <box size="0.1 0.1 0.05"/>
+            </geometry>
+            <material name="yellow"/>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0.2"/>
+            <geometry>
+                <box size="0.4 0.24 0.1"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <gazebo reference="PERED">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+
+
 
 
 

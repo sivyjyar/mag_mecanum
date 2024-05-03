@@ -7,6 +7,8 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclpy REQUIRED)
+find_package(std_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -23,11 +25,15 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(DIRECTORY launch
+install(DIRECTORY launch config description
  DESTINATION share/${PROJECT_NAME}
  )
-install(DIRECTORY description
- DESTINATION share/${PROJECT_NAME}
- )
+
+
+
+install(PROGRAMS
+  test_mecanum_robot.py  cont_mecanum.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_package()

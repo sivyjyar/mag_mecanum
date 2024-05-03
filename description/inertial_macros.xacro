@@ -37,45 +37,6 @@
     </xacro:macro>
 
 
-<!--    MECANUM WHEEL MACRO-->
-
-    <xacro:macro name="mecanum_wheel" params="scale xyz rpy joint_name child_link">
-        <joint name="${joint_name}" type="continuous">
-        <parent link="chassis"/>
-        <child link="${child_link}"/>
-        <origin xyz="${xyz}" rpy="${rpy}" />
-        <axis xyz="0 1 0"/>
-    </joint>
-
-    <link name="${child_link}">
-
-        <visual>
-            <geometry>
-                <mesh filename="file://$(find mecanum_robot)/description/meshes/mecanum_wheel_right.STL" scale="0.0015 0.0015 0.0015"/>
-            </geometry>
-            <material name="grey"/>
-        </visual>
-
-        <collision>
-            <origin xyz="0 0 0" rpy="1.5708 0 0"/>
-            <geometry>
-                <cylinder radius="${scale * 51.3}" length="${scale * 49}"/>
-<!--                <cylinder radius="0.144" length="0.13"/>-->
-<!--                <cylinder radius="0.154" length="0.150"/>-->
-            </geometry>
-        </collision>
-        <xacro:inertial_cylinder mass="0.1" length="${scale * 50}" radius="${scale * 51.3}">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </xacro:inertial_cylinder>
-    </link>
-
-        <gazebo reference="${child_link}">
-        <material>Gazebo/Grey</material>
-    </gazebo>
-    </xacro:macro>
-
-
-
 <!--    COLORS FOR GAZEBO-->
 
 

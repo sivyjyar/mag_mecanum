@@ -1,0 +1,122 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 50  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+
+    right_front_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+    left_front_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+    right_rear_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+    left_rear_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+
+
+right_front_controller:
+  ros__parameters:
+    joints:
+      - right_front_wheel_joint
+    pid: { p: 10.0, i: 0.01, d: 0.0 }
+    publish_rate: 80.0
+
+left_front_controller:
+  ros__parameters:
+    joints:
+      - left_front_wheel_joint
+    pid: { p: 10.0, i: 0.01, d: 0.0 }
+    publish_rate: 80.0
+
+right_rear_controller:
+  ros__parameters:
+    joints:
+      - right_rear_wheel_joint
+    pid: { p: 10.0, i: 0.01, d: 0.0 }
+    publish_rate: 80.0
+
+left_rear_controller:
+  ros__parameters:
+    joints:
+      - left_rear_wheel_joint
+    pid: { p: 10.0, i: 0.01, d: 0.0 }
+    publish_rate: 80.0
+
+
+
+#
+#
+#
+
+
+#    diff_cont:
+#      type: diff_drive_controller/DiffDriveController
+#
+#    joint_state_broadcaster:
+#      type: joint_state_broadcaster/JointStateBroadcaster
+#
+#diff_cont:
+#  ros__parameters:
+#    base_frame_id: base_link
+#
+#    left_wheel_names: ['left_rear_wheel_joint']
+#    right_wheel_names: ['right_rear_wheel_joint']
+#    wheel_separation: 0.35
+#    wheel_radius: 0.05
+#    use_stamped_vel: false
+
+
+
+#controller_manager:
+#	ros__parameters:
+#		update_rate: 50  # Hz
+#		use_sim_rime: true
+#
+#		diff_cont:
+#			type: diff_drive_controller/DiffDriveController
+#
+#		joint_broad:
+#			type: joint_state_broadcaster/JointStateBroadcaster
+#
+#diff_cont:
+#	ros_parameters:
+#
+#		publish_rate: 50.0
+#		base_frame_id: base_link
+#
+#		left_wheel_names: ['left_rear_wheel_joint']
+#		right_wheel_names: ['right_rear_wheel_joint']
+#		wheel_separation: 0.35
+#		wheel_radius: 0.05
+#
+#		use_stamped_vel: false
+
+#		joint_state_controller:
+#		  type: "joint_state_controller/JointStateController"
+#		  publish_rate: 50
+#
+#		right_front_controller:
+#		  type: effort_controllers/JointVelocityController
+#		  joint: right_front_wheel_joint
+#		  pid: {p: 10.0, i: 0.01, d: 0.0}
+#
+#		left_front_controller:
+#		  type: effort_controllers/JointVelocityController
+#		  joint: left_front_wheel_joint
+#		  pid: {p: 10.0, i: 0.01, d: 0.0}
+#
+#		right_rear_controller:
+#		  type: effort_controllers/JointVelocityController
+#		  joint: right_rear_wheel_joint
+#		  pid: {p: 10.0, i: 0.01, d: 0.0}
+#
+#		left_rear_controller:
+#		  type: effort_controllers/JointVelocityController
+#		  joint: left_rear_wheel_joint
+#		  pid: {p: 10.0, i: 0.01, d: 0.0}
