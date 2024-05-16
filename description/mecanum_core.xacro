@@ -18,16 +18,38 @@
         <color rgba="0.5 0.5 0.5 1"/>
     </material>
 
+
     <!-- CONSTANS -->
     <xacro:property name="PI" value="3.1415926535897931" />
 
-    <xacro:property name="wheel_radius" value="0.050" />
-    <xacro:property name="wheel_width" value="0.0505" />
+    <xacro:property name="chassis_length" value="0.4"/>
+    <xacro:property name="chassis_width" value="0.24"/>
+    <xacro:property name="chassis_height" value="0.1"/>
+
+    <xacro:property name="chassis_mass" value="1.0"/>
+    <xacro:property name="chassis_offset" value="0.1"/>
+
+    <xacro:property name="wheel_radius" value="0.3"/>
+<!--    <xacro:property name="wheel_thickness" value="0.026"/>-->
+
+    <xacro:property name="wheel_offset_x" value="0.125"/>
+
 
 
     <!-- BASE LINK -->
 
     <link name="base_link">
+    </link>
+
+    <!-- BASE_FOOTPRINT LINK -->
+
+    <joint name="base_footprint_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="base_footprint"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_footprint">
     </link>
 
     <!-- CHASSIS -->
@@ -40,21 +62,21 @@
 
     <link name="chassis">
         <visual>
-            <origin xyz="0 0 0.1"/>
+            <origin xyz="0 0 ${chassis_offset}"/>
             <geometry>
-                <box size="0.4 0.24 0.1"/>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
             </geometry>
             <material name="yellow"/>
         </visual>
 
         <collision>
-            <origin xyz="0 0 0.1"/>
+            <origin xyz="0 0 ${chassis_offset}"/>
             <geometry>
-                <box size="0.4 0.24 0.1"/>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
             </geometry>
         </collision>
-        <xacro:inertial_box mass="0.5" x="0.4" y="0.24" z="0.1">
-            <origin xyz="0 0 0.1" rpy="0 0 0"/>
+        <xacro:inertial_box mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
+            <origin xyz="0 0 ${chassis_offset}" rpy="0 0 0"/>
         </xacro:inertial_box>
     </link>
 
@@ -71,7 +93,7 @@
   <joint name="left_front_wheel_joint" type="continuous">
     <parent link="chassis" />
     <child link="left_front_wheel_link" />
-    <origin rpy="0 0 1.5708"  xyz="0.125 0.15 0.1"/>
+    <origin rpy="0 0 ${PI/2}"  xyz="${wheel_offset_x} ${wheel_radius/2} 0.1"/>
   </joint>
 
     <!--    2) LEFT REAR WHEEL-->
@@ -81,7 +103,7 @@
   <joint name="left_rear_wheel_joint" type="continuous">
     <parent link="chassis" />
     <child link="left_rear_wheel_link" />
-    <origin rpy="0 0 1.5708"  xyz="-0.125 0.15 0.1"/>
+    <origin rpy="0 0 ${PI/2}"  xyz="${-wheel_offset_x} ${wheel_radius/2} ${chassis_offset}"/>
   </joint>
 
             <!--    3) RIGHT FRONT WHEEL-->
@@ -91,7 +113,7 @@
   <joint name="right_front_wheel_joint" type="continuous">
     <parent link="chassis" />
     <child link="right_front_wheel_link" />
-    <origin rpy="0 0 1.5708"  xyz="0.125 -0.15 0.1"/>
+    <origin rpy="0 0 ${PI/2}"  xyz="${wheel_offset_x} ${-wheel_radius/2} ${chassis_offset}"/>
   </joint>
 
 
@@ -102,41 +124,45 @@
   <joint name="right_rear_wheel_joint" type="continuous">
     <parent link="chassis" />
     <child link="right_rear_wheel_link" />
-    <origin rpy="0 0 1.5708"  xyz="-0.125 -0.15 0.1"/>
+    <origin rpy="0 0 ${PI/2}"  xyz="${-wheel_offset_x} ${-wheel_radius/2} ${chassis_offset}"/>
   </joint>
 
 
 
 
 
-<!--    SHIT-->
+<!--    LIDAR THINGS-->
+    <xacro:property name="lidar_offset_z" value="0.15"/>
+    <xacro:property name="lidar_offset_x" value="0.1"/>
+    <xacro:property name="lidar_base_prop" value="0.1"/>
 
-    <joint name="PERED_joint" type="fixed">
+    <joint name="lidar_joint" type="fixed">
         <parent link="chassis" />
-    <child link="PERED" />
-        <origin xyz="0.125 0 0.15"/>
-
-
+    <child link="lidar_base" />
+        <origin xyz="${lidar_offset_x} 0 ${lidar_offset_z}"/>
     </joint>
 
-       <link name="PERED">
+       <link name="lidar_base">
         <visual>
             <origin xyz="0 0 0"/>
             <geometry>
-                <box size="0.1 0.1 0.05"/>
+                <box size="${lidar_base_prop} ${lidar_base_prop} ${lidar_base_prop}"/>
             </geometry>
             <material name="yellow"/>
         </visual>
 
         <collision>
-            <origin xyz="0 0 0.2"/>
+            <origin xyz="0 0 0"/>
             <geometry>
-                <box size="0.4 0.24 0.1"/>
+                <box size="${lidar_base_prop} ${lidar_base_prop} ${lidar_base_prop}"/>
             </geometry>
         </collision>
+        <xacro:inertial_box mass="${chassis_mass/5}" x="${lidar_base_prop}" y="${lidar_base_prop}" z="${lidar_base_prop}">
+            <origin xyz="0 0 ${chassis_offset}" rpy="0 0 0"/>
+        </xacro:inertial_box>
     </link>
 
-    <gazebo reference="PERED">
+    <gazebo reference="lidar_base">
         <material>Gazebo/Yellow</material>
     </gazebo>
 
