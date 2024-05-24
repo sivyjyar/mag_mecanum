@@ -32,7 +32,7 @@ install(DIRECTORY launch config description
 
 
 install(PROGRAMS
-  test_mecanum_robot.py  cont_mecanum.py
+  holonomic_keyboard.py  cont_mecanum.py transform_odom.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

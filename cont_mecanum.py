@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import rclpy
-import time
+import threading
 import numpy as np
 from rclpy.node import Node
 
@@ -29,18 +29,11 @@ class MecanumNode(Node):
             '/cmd_vel',
             self.callback_data,
             10)
-        # # self.subscription
-
-
 
         self.fr_pub = self.create_publisher(Float64MultiArray, '/right_front_controller/commands', 10)
         self.fl_pub = self.create_publisher(Float64MultiArray, '/left_front_controller/commands', 10)
         self.rr_pub = self.create_publisher(Float64MultiArray, '/right_rear_controller/commands', 10)
         self.rl_pub = self.create_publisher(Float64MultiArray, '/left_rear_controller/commands', 10)
-
-        # timer_period = 0.5  # seconds
-        # self.timer = self.create_timer(timer_period, self.timer_callback)
-
 
     def callback_data(self, msg):
 
@@ -61,32 +54,19 @@ class MecanumNode(Node):
 
         wv.data = [wheel_vel[3]]
         self.rl_pub.publish(wv)
-
-        # new_msg = Float64MultiArray()
-        # new_msg.data = [msg.linear.x]
-        # print(msg.linear.x)
-
-
-
-        # self.get_logger().info("Received: ")
-        # self.publisher.publish(new_msg)
-
-    # def listener_callback(self, msg):
-    #     lin_x = Vector3()
-    #     lin_x.x = msg.linear.x
-    #     print(lin_x)
-    #     self.get_logger().info('guudddd')
-    #
-    # def timer_callback(self):
-    #     msg = Float64MultiArray()
-    #     msg.data = lin_x
-    #     self.publisher.publish(msg.data)
-    #     self.get_logger().info('Publishing:')
+        #
+        # dF = (wheel_vel[0]+wheel_vel[1]+wheel_vel[2]+wheel_vel[3])/4
+        # dR = (-wheel_vel[0]+wheel_vel[1]+wheel_vel[2]-wheel_vel[3])/4
+        #
+        # print(dF, dR)
 
 def main(args=None):
     rclpy.init(args=args)
     mecanum_node = MecanumNode()
     rclpy.spin(mecanum_node)
+
+    # spinner = threading.Thread(target=rclpy.spin, args=(mecanum_node,))
+    # spinner.start()
 
 
     mecanum_node.destroy_node()

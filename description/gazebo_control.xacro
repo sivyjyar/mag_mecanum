@@ -27,21 +27,4 @@
         </plugin>
     </gazebo>
 
-<!--    <gazebo>-->
-<!--  <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">-->
-<!--    <updateRate>100.0</updateRate>-->
-<!--    <robotNamespace>/</robotNamespace>-->
-<!--    <leftFrontJoint>left_front_wheel_joint</leftFrontJoint>-->
-<!--    <rightFrontJoint>right_front_wheel_joint</rightFrontJoint>-->
-<!--    <leftRearJoint>left_rear_wheel_joint</leftRearJoint>-->
-<!--    <rightRearJoint>right_rear_wheel_joint</rightRearJoint>-->
-<!--    <wheelSeparation>0.3</wheelSeparation>-->
-<!--    <wheelDiameter>0.2</wheelDiameter>-->
-<!--    <robotBaseFrame>base_link</robotBaseFrame>-->
-<!--    <torque>20</torque>-->
-<!--    <topicName>cmd_vel</topicName>-->
-<!--    <broadcastTF>false</broadcastTF>-->
-<!--  </plugin>-->
-<!--</gazebo>-->
-
  </robot>
