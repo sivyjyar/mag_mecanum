@@ -15,8 +15,8 @@ slam_toolbox:
     base_frame: base_link
     scan_topic: /scan
 #    use_map_saver: true
-#    mode: localization
-    mode: mapping #localization
+    mode: localization
+#    mode: mapping
 
 
 
@@ -29,9 +29,10 @@ slam_toolbox:
     #### Изменяется в том случае, если необходимо использовать готовую карту.
     ### в случае, если у нас картографирование - оставляем закоменченным
 
-#    map_file_name: /home/sivyjar/dev_ws/mec_map_serial
-#    # map_start_pose: [0.0, 0.0, 0.0]
-#    map_start_at_dock: true
+    map_file_name: /home/sivyjar/dev_ws/mec_map_serial
+    # map_start_pose: [0.0, 0.0, 0.0]
+    map_start_at_dock: true
+
 
     debug_logging: false
     throttle_scans: 1

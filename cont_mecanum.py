@@ -43,16 +43,16 @@ class MecanumNode(Node):
 
         wv = Float64MultiArray()
 
-        wv.data = [wheel_vel[0]]
+        wv.data = [5*wheel_vel[0]]
         self.fr_pub.publish(wv)
 
-        wv.data = [wheel_vel[1]]
+        wv.data = [5*wheel_vel[1]]
         self.fl_pub.publish(wv)
 
-        wv.data = [wheel_vel[2]]
+        wv.data = [5*wheel_vel[2]]
         self.rr_pub.publish(wv)
 
-        wv.data = [wheel_vel[3]]
+        wv.data = [5*wheel_vel[3]]
         self.rl_pub.publish(wv)
         #
         # dF = (wheel_vel[0]+wheel_vel[1]+wheel_vel[2]+wheel_vel[3])/4

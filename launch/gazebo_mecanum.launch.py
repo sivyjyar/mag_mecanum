@@ -109,7 +109,7 @@ def generate_launch_description():
 
         cont_mecanum,
         map_odom,
-        start_async_slam_toolbox_node
+        # start_async_slam_toolbox_node
 
     ])
 
