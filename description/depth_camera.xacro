@@ -29,9 +29,7 @@
 
     <link name="depth_camera_link_optical"></link>
 
-
-
-    <gazebo reference="depth_camera_link">
+<gazebo reference="depth_camera_link">
         <material>Gazebo/Black </material>
 
 
@@ -57,5 +55,7 @@
         </sensor>
 
     </gazebo>
+
+
 
 </robot>

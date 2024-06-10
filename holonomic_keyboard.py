@@ -21,10 +21,13 @@ as Twist/TwistStamped messages.
    u    i    o
    j    k    l
    m    ,    .
+   
+y and p for turning
 
 anything else : stop
 
 q/z : increase/decrease max speeds by 10%
+e/c : increase/decrease only angular speed by 10%
 
 CTRL-C to quit
 """
@@ -38,11 +41,16 @@ moveBindings = {
     ',': (-1, 0, 0, 0),
     '.': (-1, -1, 0, 0),
     'm': (-1, 1, 0, 0),
+    'y': (1, 0, 0, 1),
+    'p':( 1, 0, 0, -1),
 }
 
 speedBindings = {
     'q': (1.1, 1.1),
     'z': (.9, .9),
+    'e': (1, 1.1),
+    'c': (1, .9),
+
 }
 
 
